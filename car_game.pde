@@ -1,53 +1,88 @@
-Car player;
-Car[] enemies;
-
+PlayerCar player;
+EnemyCar enemy1;
+EnemyCar enemy2;
+EnemyCar enemy3;
 boolean gameOver = false;
 int score = 0;
 
-
 void setup() {
   size(400, 600);
-  player = new Car(width/2 - 20, height - 100, color(0, 0, 255));
-  enemies = new Car[3];
-  for (int i = 0; i < enemies.length; i++) {
-    enemies[i] = new Car(random(80, width-80), random(-400, -50), color(255, 0, 0));
-    enemies[i].speed = 4;
-  }
+  player = new PlayerCar(180, 500, color(0, 0, 255));
+  enemy1 = new EnemyCar(100, -50, color(255, 0, 0));
+  enemy2 = new EnemyCar(200, -200, color(255, 0, 0));
+  enemy3 = new EnemyCar(300, -350, color(255, 0, 0));
 }
-
 
 void draw() {
   background(50);
   drawRoad();
-  if (!gameOver) {
+  
+  if (gameOver == false) {
+    // Show player
     player.show();
-    player.movePlayer();
-    for (int i = 0; i < enemies.length; i++) {
-      enemies[i].move();
-      enemies[i].show();
-      if (player.hit(enemies[i])) {
-        gameOver = true;
-      }
-      if (enemies[i].y > height) {
-        enemies[i].reset();
-        score++;
-      }
+    player.move();
+    
+    // Show and move enemies
+    enemy1.show();
+    enemy1.move();
+    
+    enemy2.show();
+    enemy2.move();
+    
+    enemy3.show();
+    enemy3.move();
+    
+    // Check crashes
+    if (player.hit(enemy1)) {
+      gameOver = true;
     }
+    if (player.hit(enemy2)) {
+      gameOver = true;
+    }
+    if (player.hit(enemy3)) {
+      gameOver = true;
+    }
+    
+    // Check if enemy passed - add points
+    if (enemy1.y > height) {
+      enemy1.reset();
+      score = score + 1;
+    }
+    if (enemy2.y > height) {
+      enemy2.reset();
+      score = score + 1;
+    }
+    if (enemy3.y > height) {
+      enemy3.reset();
+      score = score + 1;
+    }
+    
     showScore();
-  } 
-  else {
+  } else {
     gameOverScreen();
   }
 }
 
-
 void drawRoad() {
+  // Grass
   fill(20, 150, 20);
-  rect(0, 0, 50, height);
-  rect(width-50, 0, 50, height);
-
-  fill(255);
-  rect(width/2 - 5, frameCount % 60 * 10, 10, 40);
+  rect(0, 0, 60, height);
+  rect(340, 0, 60, height);
+  
+  // Road
+  fill(40);
+  rect(60, 0, 280, height);
+  
+  // Yellow line in middle
+  fill(255, 255, 0);
+  rect(197, 0, 6, 40);
+  rect(197, 80, 6, 40);
+  rect(197, 160, 6, 40);
+  rect(197, 240, 6, 40);
+  rect(197, 320, 6, 40);
+  rect(197, 400, 6, 40);
+  rect(197, 480, 6, 40);
+  rect(197, 560, 6, 40);
 }
 
 void showScore() {
@@ -57,21 +92,23 @@ void showScore() {
 }
 
 void gameOverScreen() {
-  fill(255);
-  textAlign(CENTER);
+  fill(255, 0, 0);
   textSize(36);
-  text("GAME OVER", width/2, height/2);
-  textSize(18);
-  text("Press R to Restart", width/2, height/2 + 40);
+  text("GAME OVER", 80, 300);
+  fill(255);
+  textSize(20);
+  text("Score: " + score, 140, 340);
+  text("Press R to Restart", 100, 380);
 }
 
 void keyPressed() {
-  if (gameOver && key == 'r') {
+  if (gameOver == true && key == 'r') {
     score = 0;
     gameOver = false;
-
-    for (int i = 0; i < enemies.length; i++) {
-      enemies[i].reset();
-    }
+    player.x = 180;
+    player.y = 500;
+    enemy1.reset();
+    enemy2.reset();
+    enemy3.reset();
   }
 }

@@ -1,43 +1,42 @@
 class Car {
-  float x, y;
-  float w = 40;
-  float h = 70;
-  float speed = 5;
+  float x;
+  float y;
+  float w;
+  float h;
+  float speed;
   color c;
-
-  Car(float x, float y, color c) {
-    this.x = x;
-    this.y = y;
-    this.c = c;
+  
+  Car(float startX, float startY, color carColor) {
+    x = startX;
+    y = startY;
+    c = carColor;
+    w = 40;
+    h = 70;
+    speed = 5;
   }
-
+  
   void show() {
     fill(c);
     rect(x, y, w, h);
   }
-
-  void movePlayer() {
-    if (keyPressed) {
-      if (keyCode == LEFT) x -= speed;
-      if (keyCode == RIGHT) x += speed;
-    }
-
-    x = constrain(x, 60, width-100);
-  }
-
+  
   void move() {
-    y += speed;
+    // This will be different for each type of car
   }
-
+  
   void reset() {
-    y = random(-300, -50);
-    x = random(80, width-80);
+    y = -100;
+    x = random(80, 320);
   }
-
+  
   boolean hit(Car other) {
-    return x < other.x + other.w &&
-           x + w > other.x &&
-           y < other.y + other.h &&
-           y + h > other.y;
+    if (x < other.x + other.w && 
+        x + w > other.x && 
+        y < other.y + other.h && 
+        y + h > other.y) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

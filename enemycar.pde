@@ -6,6 +6,6 @@ class EnemyCar extends Car {
   }
   
   void move() {
-    y = y + speed;
+    y += speed;
   }
 }

@@ -21,7 +21,6 @@ class Car {
   }
   
   void move() {
-    // This will be different for each type of car
   }
   
   void reset() {

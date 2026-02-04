@@ -16,23 +16,13 @@ void setup() {
 void draw() {
   background(50);
   drawRoad();
-  
   if (gameOver == false) {
-    // Show player
     player.show();
     player.move();
-    
-    // Show and move enemies
     enemy1.show();
     enemy1.move();
+
     
-    enemy2.show();
-    enemy2.move();
-    
-    enemy3.show();
-    enemy3.move();
-    
-    // Check crashes
     if (player.hit(enemy1)) {
       gameOver = true;
     }
@@ -43,7 +33,6 @@ void draw() {
       gameOver = true;
     }
     
-    // Check if enemy passed - add points
     if (enemy1.y > height) {
       enemy1.reset();
       score = score + 1;
@@ -64,16 +53,13 @@ void draw() {
 }
 
 void drawRoad() {
-  // Grass
   fill(20, 150, 20);
   rect(0, 0, 60, height);
   rect(340, 0, 60, height);
   
-  // Road
   fill(40);
   rect(60, 0, 280, height);
   
-  // Yellow line in middle
   fill(255, 255, 0);
   rect(197, 0, 6, 40);
   rect(197, 80, 6, 40);

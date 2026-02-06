@@ -1,4 +1,4 @@
-class Car {
+class Car implements Moveable, Collidable {
   float x;
   float y;
   float w;
@@ -21,6 +21,7 @@ class Car {
   }
   
   void move() {
+    // This will be different for each type of car
   }
   
   void reset() {

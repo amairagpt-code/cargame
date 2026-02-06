@@ -25,7 +25,7 @@ class LevelScreen {
     text("Get Ready!", 130, 320);
     
     textSize(18);
-    text("Cars are faster!", 120, 370);
+    text("Cars are gonna be faster!", 120, 370);
     
     if (frameCount - startTime > 60) {
       fill(0, 255, 0);

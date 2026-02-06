@@ -11,7 +11,7 @@ boolean showingLevel = false;
 
 int score = 0;
 int level = 1;
-int carsForNextLevel = 5;
+int carsForNextLevel = 15;
 
 void setup() {
   size(400, 600);

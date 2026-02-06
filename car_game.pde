@@ -1,3 +1,4 @@
+// creating the objects
 PlayerCar player;
 EnemyCar enemy1;
 EnemyCar enemy2;
@@ -5,14 +6,17 @@ EnemyCar enemy3;
 LevelScreen levelScreen;
 Road road;
 
+// setting starting game values 
 boolean gameOver = false;
 boolean gameStarted = false;
 boolean showingLevel = false;
 
+// scoring initial values
 int score = 0;
 int level = 1;
 int carsForNextLevel = 15;
 
+// seting up the homescreen 
 void setup() {
   size(400, 600);
   player = new PlayerCar(180, 500, color(0, 0, 255));
@@ -23,9 +27,9 @@ void setup() {
   road = new Road();
 }
 
+
 void draw() {
   background(50);
-  
   if (gameStarted == false) {
     introScreen();
   } 
@@ -91,10 +95,11 @@ void draw() {
   }
 }
 
+// 
 void checkLevelUp() {
   if (score >= carsForNextLevel) {
     level = level + 1;
-    carsForNextLevel = carsForNextLevel + 5;
+    carsForNextLevel = carsForNextLevel + 15;
     
     enemy1.speed = enemy1.speed + 0.5;
     enemy2.speed = enemy2.speed + 0.5;
@@ -107,6 +112,7 @@ void checkLevelUp() {
   }
 }
 
+// intro screen before you start the actual game 
 void introScreen() {
   background(20, 100, 200);
   
@@ -130,6 +136,8 @@ void introScreen() {
   }
 }
 
+// this calculates the score 
+
 void showScore() {
   fill(255);
   textSize(20);
@@ -137,6 +145,7 @@ void showScore() {
   text("Level: " + level, 20, 55);
 }
 
+// screen to end the game
 void gameOverScreen() {
   fill(255, 0, 0);
   textSize(36);
@@ -147,6 +156,8 @@ void gameOverScreen() {
   text("Level: " + level, 145, 330);
   text("Press R to Restart", 100, 380);
 }
+
+// key coding for the levels (exiting and space to start) 
 
 void keyPressed() {
   if (gameStarted == false && key == ' ') {

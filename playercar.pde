@@ -1,4 +1,5 @@
 class PlayerCar extends Car {
+  
   PlayerCar(float startX, float startY, color carColor) {
     super(startX, startY, carColor);
   }
@@ -6,10 +7,10 @@ class PlayerCar extends Car {
   void move() {
     if (keyPressed == true) {
       if (keyCode == LEFT) {
-        x -= speed;
+        x = x - speed;
       }
       if (keyCode == RIGHT) {
-        x += speed;
+        x = x + speed;
       }
     }
     
